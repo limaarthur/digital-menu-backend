@@ -1,11 +1,12 @@
 package com.ignitec.menu.controllers;
 
 import com.ignitec.menu.dtos.FoodDTO;
+import com.ignitec.menu.entities.Food;
 import com.ignitec.menu.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +16,11 @@ public class FoodController {
 
     @Autowired
     private FoodService foodService;
+
+    @PostMapping
+    public ResponseEntity<Food> save(@RequestBody FoodDTO foodDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(foodService.save(foodDTO));
+    }
 
     @GetMapping
     public List<FoodDTO> findAll() {
