@@ -17,11 +17,13 @@ public class FoodController {
     @Autowired
     private FoodService foodService;
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public ResponseEntity<Food> save(@RequestBody FoodDTO foodDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(foodService.save(foodDTO));
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
     public List<FoodDTO> findAll() {
         var foods = foodService.findAll();
